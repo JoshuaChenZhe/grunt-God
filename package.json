@@ -2,7 +2,8 @@
   "name": "grunt-God",
   "description": "The grunt plugin for code-only",
   "version": "0.1.0",
-  "homepage": "https://github.com/JoshuaChenZhe/grunt-God",
+  "repository": "https://github.com/JoshuaChenZhe/grunt-God",
+  "homepage":"https://joshuachenzhe.github.io/grunt-God/",
   "author": {
     "name": "陈哲",
     "email": "707345756@qq.com"
