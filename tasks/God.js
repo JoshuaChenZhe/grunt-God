@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       who: 'doge',
-      commentSymbol: '//'
+      type: 'html'
     });
 
     var testExisRegexMap = {
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     };
 
     var who = options.who,
-        commentSymbol = options.commentSymbol,
+        type = options.fileType,
         commentFilePathMap = {'doge':'asset/doge.txt'},
         commentFilePath = path.join(__dirname, commentFilePathMap[who]),
         commentContent = grunt.file.read(commentFilePath),
@@ -48,12 +48,26 @@ module.exports = function(grunt) {
             var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
             return currentdate;
         })();
-    
-    lineCommentArr.forEach(function (value, index, arr) {
-          arr[index] = commentSymbol + value;
-    });
+    if (type === 'html') {
+      commentContent = '<!--' +
+                       commentContent +
+                       ' at ' +
+                       currentdate +
+                       '-->';
+    } else if (type === 'js') {
+      lineCommentArr.forEach(function (value, index, arr) {
+            arr[index] = '//' + value;
+      });
 
-    commentContent = lineCommentArr.join(grunt.util.normalizelf('\n'));
+      commentContent = lineCommentArr.join(grunt.util.normalizelf('\n'));
+      commentContent = commentContent +
+                       ' at ' +
+                       currentdate;
+    } else{
+      console.log('请为html或js文件添加标识注释');
+      commentContent = '';
+    }
+    
 
 
 
@@ -74,11 +88,7 @@ module.exports = function(grunt) {
         // Read file source.
 
         var originalFileContent = grunt.file.read(filepath),
-            newFileContent = '<!--'+
-                             commentContent +
-                             ' at ' +
-                             currentdate +
-                             '-->'+
+            newFileContent = commentContent +
                              grunt.util.normalizelf('\n') +
                              originalFileContent;
 

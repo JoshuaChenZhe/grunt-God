@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     God: {
       options:{
         who: 'doge',
-        commentSymbol: '//'
+        fileType: 'html'
       },
       dist: ['test/fixtures/*']
     },

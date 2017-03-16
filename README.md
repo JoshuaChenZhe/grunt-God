@@ -45,11 +45,11 @@ Default value: `doge`
 
 A string value that is used to do something with whatever.
 
-#### options.commentSymbol
+#### options.fileType
 Type: `String`
-Default value: `//`
+Default value: `html`
 
-文件中拼接标签的注释符
+文件类型为html或js
 
 A string value that is used to do something else with whatever else.
 
@@ -62,7 +62,7 @@ grunt.initConfig({
   God: {
     options: {
       'who':'doge',
-      'commentSymbol':'//'
+      'fileType':'html'
     },
     dist:['examples/*']
   },
